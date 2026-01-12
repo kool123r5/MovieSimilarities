@@ -1,6 +1,5 @@
 node_modules
 .DS_Store
 /model/*.csv
-*.pth
-*.bin
 /model/*.json
+*.pth
