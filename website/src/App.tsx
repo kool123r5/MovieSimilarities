@@ -3,7 +3,7 @@ import Autocomplete from "./Autocomplete";
 import { Button } from "./components/ui/button";
 import { movies } from "./movies";
 import { findNearestMovie, type NeighborMovie } from "./helpers/findNearestMovie";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { loadEmbeddings } from "./helpers/loadEmbeddings";
 import { idToTitle } from "./helpers/idToTitle";
 
@@ -15,7 +15,9 @@ export default function App() {
         const movie = movies[i];
         titles.push(movie[1] as string);
     }
-    loadEmbeddings();
+    useEffect(() => {
+        loadEmbeddings();
+    }, []);
     return (
         <div className="App">
             <div className="flex justify-center flex-col w-200 items-center">
