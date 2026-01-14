@@ -20,7 +20,7 @@ export default function App() {
     }, []);
     return (
         <div className="App">
-            <div className="flex justify-center flex-col w-200 items-center">
+            <div className="flex justify-center flex-col w-full items-center">
                 <h1>Enter a movie you *currently* like</h1>
 
                 <Autocomplete
@@ -30,7 +30,7 @@ export default function App() {
                     placeholder={`Eg: ${titles[Math.floor(Math.random() * titles.length)]}`}
                 />
                 <Button
-                    className="w-100 bg-neutral-700 align-middle hover:cursor-pointer hover:bg-neutral-600"
+                    className="max-w-100 bg-neutral-700 align-middle hover:cursor-pointer hover:bg-neutral-600"
                     onClick={() => {
                         const currentResults = findNearestMovie(currentInput);
                         setResults(currentResults);
