@@ -103,57 +103,55 @@ export default function Autocomplete({
     }
 
     return (
-        <div className="w-full max-w-2xl mx-auto p-6">
-            <div className="relative">
-                <div className="relative">
-                    <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-white/40" />
-                    <Input
-                        ref={inputRef}
-                        value={value}
-                        placeholder={placeholder}
-                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => setValue(e.target.value)}
-                        onKeyDown={onKeyDown}
-                        onFocus={() => filtered.length && setOpen(true)}
-                        className="pl-10 h-12 bg-white/5 border-white/10 text-white placeholder:text-white/30 focus:border-white/20 focus:ring-2 focus:ring-white/10"
-                        aria-autocomplete="list"
-                        aria-expanded={open}
-                    />
-                </div>
-
-                {open && filtered.length > 0 && (
-                    <div
-                        ref={listRef}
-                        role="listbox"
-                        className="absolute left-0 right-0 mt-2 max-h-80 overflow-auto rounded-lg border border-white/10 bg-zinc-900/95 backdrop-blur-sm shadow-2xl z-50"
-                    >
-                        <div className="p-1.5">
-                            {filtered.map((item, index) => (
-                                <div
-                                    key={`${item}-${index}`}
-                                    data-item
-                                    role="option"
-                                    aria-selected={index === highlight}
-                                    className={`
-                                            px-3 py-2.5 rounded-md cursor-pointer transition-all duration-75
-                                            ${
-                                                index === highlight
-                                                    ? "bg-white text-zinc-900 font-medium"
-                                                    : "text-white/90 hover:bg-white/10"
-                                            }
-                                        `}
-                                    onMouseEnter={() => setHighlight(index)}
-                                    onMouseDown={(e) => {
-                                        e.preventDefault();
-                                        pick(item);
-                                    }}
-                                >
-                                    {item}
-                                </div>
-                            ))}
-                        </div>
-                    </div>
-                )}
+        <div className="w-full relative group">
+            <div className="relative transition-all duration-300 ease-in-out">
+                <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-stone-500 group-focus-within:text-stone-300 transition-colors" />
+                <Input
+                    ref={inputRef}
+                    value={value}
+                    placeholder={placeholder}
+                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => setValue(e.target.value)}
+                    onKeyDown={onKeyDown}
+                    onFocus={() => filtered.length && setOpen(true)}
+                    className="pl-12 h-14 bg-stone-900/50 border-stone-800 text-stone-100 placeholder:text-stone-600 focus:border-stone-600 focus:ring-4 focus:ring-white/5 rounded-2xl shadow-sm text-base transition-all"
+                    aria-autocomplete="list"
+                    aria-expanded={open}
+                />
             </div>
+
+            {open && filtered.length > 0 && (
+                <div
+                    ref={listRef}
+                    role="listbox"
+                    className="absolute left-0 right-0 mt-2 max-h-80 overflow-auto rounded-xl border border-stone-800 bg-stone-900/95 backdrop-blur-xl shadow-2xl z-50 scrollbar-thin scrollbar-thumb-stone-700 scrollbar-track-transparent"
+                >
+                    <div className="p-2 space-y-0.5">
+                        {filtered.map((item, index) => (
+                            <div
+                                key={`${item}-${index}`}
+                                data-item
+                                role="option"
+                                aria-selected={index === highlight}
+                                className={`
+                                        px-4 py-3 rounded-lg cursor-pointer text-sm transition-all duration-150 flex items-center
+                                        ${
+                                            index === highlight
+                                                ? "bg-stone-100 text-stone-900 shadow-md shadow-black/20"
+                                                : "text-stone-300 hover:bg-stone-800/50 hover:text-white"
+                                        }
+                                    `}
+                                onMouseEnter={() => setHighlight(index)}
+                                onMouseDown={(e) => {
+                                    e.preventDefault();
+                                    pick(item);
+                                }}
+                            >
+                                {item}
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            )}
         </div>
     );
 }
